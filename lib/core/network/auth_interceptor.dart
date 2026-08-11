@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 import '../storage/token_storage.dart';
 
 class AuthInterceptor extends Interceptor {
@@ -23,5 +22,17 @@ class AuthInterceptor extends Interceptor {
     }
 
     handler.next(options);
+  }
+
+  @override
+  Future<void> onError(
+      DioException err,
+      ErrorInterceptorHandler handler,
+      ) async {
+    if (err.response?.statusCode == 401) {
+      await tokenStorage.deleteToken();
+    }
+
+    handler.next(err);
   }
 }
