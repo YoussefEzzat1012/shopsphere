@@ -72,3 +72,4 @@ dev_dependencies:
   json_serializable: ^6.11.0
   retrofit_generator: ^10.0.1
   mocktail: ^1.0.5
+  bloc_test: ^10.0.0
